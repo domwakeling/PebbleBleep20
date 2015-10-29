@@ -1,0 +1,45 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "dominic.wakeling@btinternet.com",
+    "longName": "20 Metre Bleep Test",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "images/bleep_icon_28.png",
+                "menuIcon": true,
+                "name": "MENU_ICON",
+                "type": "png"
+            },
+            {
+                "file": "images/ellipsis.png",
+                "name": "IMAGE_ELLIPSIS_ICON",
+                "type": "png"
+            },
+            {
+                "file": "images/triangle.png",
+                "name": "IMAGE_TRI_ICON",
+                "type": "png"
+            },
+            {
+                "file": "images/square.png",
+                "name": "IMAGE_SQUARE_ICON",
+                "type": "png"
+            }
+        ]
+    },
+    "sdkVersion": "3",
+    "shortName": "Bleep Test",
+    "targetPlatforms": [
+        "basalt",
+        "chalk"
+    ],
+    "uuid": "277451fb-9d0d-438a-ae1c-8d759294188d",
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": false
+    }
+}
