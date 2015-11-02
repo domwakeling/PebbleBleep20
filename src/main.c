@@ -142,9 +142,14 @@ static void initial_text_layer_setup(Layer *window_layer) {
 	};
   round_layer = text_layer_create(r_l_bounds);
 	text_layer_set_text_alignment(round_layer, GTextAlignmentRight);
+	#ifdef PBL_COLOR
 	text_layer_set_font(round_layer, fonts_get_system_font(FONT_KEY_LECO_42_NUMBERS));
+	#else
+	#endif
 	text_layer_set_background_color(round_layer, GColorClear);
+	#ifdef PBL_COLOR
 	text_layer_set_text_color(round_layer, GColorRed);
+	#endif
   layer_add_child(window_layer, text_layer_get_layer(round_layer));
 	
 	GRect l_l_bounds = (GRect) {
@@ -158,7 +163,10 @@ static void initial_text_layer_setup(Layer *window_layer) {
 	};
   lap_layer = text_layer_create(l_l_bounds);
 	text_layer_set_text_alignment(lap_layer, GTextAlignmentLeft);
+	#ifdef PBL_COLOR
 	text_layer_set_font(lap_layer, fonts_get_system_font(FONT_KEY_LECO_42_NUMBERS));
+	#else
+	#endif
 	text_layer_set_background_color(lap_layer, GColorClear);
   layer_add_child(window_layer, text_layer_get_layer(lap_layer));
 	
@@ -174,7 +182,9 @@ static void initial_text_layer_setup(Layer *window_layer) {
 	text_layer_set_text_alignment(round_label, GTextAlignmentLeft);
 	text_layer_set_font(round_label, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD));
 	text_layer_set_background_color(round_label, GColorClear);
+	#ifdef PBL_COLOR
 	text_layer_set_text_color(round_label, GColorRed);
+	#endif
 	layer_add_child(window_layer, text_layer_get_layer(round_label));
 	
 	GRect l_lab_bounds = (GRect) {
@@ -304,20 +314,32 @@ static void update_display_prerun() {
 	display_level_and_lap();
 	hide_completed_laps();
 	hide_vo2max();
+	#ifdef PBL_SDK_3
 	action_bar_layer_set_icon_animated(a_b_layer, BUTTON_ID_SELECT, tri_icon, false);
+	#elif PBL_SDK_2
+	action_bar_layer_set_icon(a_b_layer, BUTTON_ID_SELECT, tri_icon);
+	#endif
 }
 
 static void update_display_running() {	
 	display_level_and_lap();
 	display_completed_laps();
+	#ifdef PBL_SDK_3
 	action_bar_layer_set_icon_animated(a_b_layer, BUTTON_ID_SELECT, square_icon, false);
+	#elif PBL_SDK_2
+	action_bar_layer_set_icon(a_b_layer, BUTTON_ID_SELECT, square_icon);
+	#endif
 }
 
 static void update_display_post_run() {
 	display_level_and_lap();
 	display_completed_laps();
 	display_vo2max();
+	#ifdef PBL_SDK_3
 	action_bar_layer_set_icon_animated(a_b_layer, BUTTON_ID_SELECT, dots_icon, false);
+	#elif PBL_SDK_2
+	action_bar_layer_set_icon(a_b_layer, BUTTON_ID_SELECT, dots_icon);
+	#endif
 }
 
 static void update_display() {
@@ -333,7 +355,11 @@ static void update_display() {
 static void progress_layer_update_proc(Layer *l, GContext *ctx) {
 	
 	if(run_stage == RUNNING) {
+		#ifdef PBL_COLOR
 		draw_progress_bar(l, ctx, lap_progress, PROG_BACK, PROG_GREY, PROG_COMP);
+		#else
+		draw_progress_bar(l, ctx, lap_progress, PROG_BACK, GColorClear, GColorWhite);
+		#endif
 	}
 	
 }

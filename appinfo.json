@@ -34,11 +34,12 @@
     "sdkVersion": "3",
     "shortName": "Bleep Test",
     "targetPlatforms": [
+        "aplite",
         "basalt",
         "chalk"
     ],
     "uuid": "277451fb-9d0d-438a-ae1c-8d759294188d",
-    "versionLabel": "1.0",
+    "versionLabel": "1.1",
     "watchapp": {
         "watchface": false
     }
