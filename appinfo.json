@@ -17,16 +17,31 @@
             {
                 "file": "images/ellipsis.png",
                 "name": "IMAGE_ELLIPSIS_ICON",
+                "targetPlatforms": [
+                    "aplite",
+                    "basalt",
+                    "chalk"
+                ],
                 "type": "png"
             },
             {
                 "file": "images/triangle.png",
                 "name": "IMAGE_TRI_ICON",
+                "targetPlatforms": [
+                    "aplite",
+                    "basalt",
+                    "chalk"
+                ],
                 "type": "png"
             },
             {
                 "file": "images/square.png",
                 "name": "IMAGE_SQUARE_ICON",
+                "targetPlatforms": [
+                    "aplite",
+                    "basalt",
+                    "chalk"
+                ],
                 "type": "png"
             }
         ]

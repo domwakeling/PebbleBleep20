@@ -133,7 +133,11 @@ static void initial_text_layer_setup(Layer *window_layer) {
 	GRect bounds = layer_get_bounds(window_layer);
 	
 	GRect r_l_bounds = (GRect) {
+		#ifdef PBL_PLATFORM_APLITE
+		.origin = { ROUND_LAB_OFF_SQ/2 , (bounds.size.h - ROUND_HEIGHT) / 2 + ROUND_V_OFF},
+		#else
 		.origin = { 0 , (bounds.size.h - ROUND_HEIGHT) / 2 + ROUND_V_OFF},
+		#endif
 		#ifdef PBL_ROUND
 		.size = { (bounds.size.w - ACTION_BAR_WIDTH/2 )/2, ROUND_HEIGHT}
 		#else
@@ -141,10 +145,15 @@ static void initial_text_layer_setup(Layer *window_layer) {
 		#endif
 	};
   round_layer = text_layer_create(r_l_bounds);
+	#ifdef PBL_PLATFORM_APLITE
+	text_layer_set_text_alignment(round_layer, GTextAlignmentLeft);
+	#else
 	text_layer_set_text_alignment(round_layer, GTextAlignmentRight);
+	#endif
 	#ifdef PBL_COLOR
 	text_layer_set_font(round_layer, fonts_get_system_font(FONT_KEY_LECO_42_NUMBERS));
 	#else
+	text_layer_set_font(round_layer, fonts_get_system_font(FONT_KEY_BITHAM_34_MEDIUM_NUMBERS));
 	#endif
 	text_layer_set_background_color(round_layer, GColorClear);
 	#ifdef PBL_COLOR
@@ -156,16 +165,24 @@ static void initial_text_layer_setup(Layer *window_layer) {
 		#ifdef PBL_ROUND
 		.origin = { (bounds.size.w - ACTION_BAR_WIDTH/2) / 2 + LAP_H_OFF, (bounds.size.h - LAP_HEIGHT) / 2 + LAP_V_OFF},
 		.size = { (bounds.size.w - ACTION_BAR_WIDTH/2 ) / 2 - LAP_H_OFF, LAP_HEIGHT}
+		#elif PBL_PLATFORM_APLITE
+		.origin = { 0, (bounds.size.h - LAP_HEIGHT) / 2 + LAP_V_OFF},
+		.size = { (bounds.size.w - ACTION_BAR_WIDTH ) - ROUND_LAB_OFF_SQ/2, LAP_HEIGHT}
 		#else
 		.origin = { (bounds.size.w - ACTION_BAR_WIDTH) / 2 + LAP_H_OFF, (bounds.size.h - LAP_HEIGHT) / 2 + LAP_V_OFF},
 		.size = { (bounds.size.w - ACTION_BAR_WIDTH ) / 2 - LAP_H_OFF, LAP_HEIGHT}
 		#endif
 	};
   lap_layer = text_layer_create(l_l_bounds);
+	#ifdef PBL_PLATFORM_APLITE
+	text_layer_set_text_alignment(lap_layer, GTextAlignmentRight);
+	#else
 	text_layer_set_text_alignment(lap_layer, GTextAlignmentLeft);
+	#endif
 	#ifdef PBL_COLOR
 	text_layer_set_font(lap_layer, fonts_get_system_font(FONT_KEY_LECO_42_NUMBERS));
 	#else
+	text_layer_set_font(lap_layer, fonts_get_system_font(FONT_KEY_BITHAM_34_MEDIUM_NUMBERS));
 	#endif
 	text_layer_set_background_color(lap_layer, GColorClear);
   layer_add_child(window_layer, text_layer_get_layer(lap_layer));
@@ -173,6 +190,8 @@ static void initial_text_layer_setup(Layer *window_layer) {
 	GRect r_lab_bounds = (GRect) {
 		#ifdef PBL_ROUND
 		.origin = { r_l_bounds.origin.x + ROUND_LAB_OFF_RD, r_l_bounds.origin.y - LABEL_HEIGHT + LABEL_V_OFF},
+		#elif PBL_PLATFORM_APLITE
+		.origin = { r_l_bounds.origin.x + ROUND_LAB_OFF_SQ/2, r_l_bounds.origin.y - LABEL_HEIGHT + LABEL_V_OFF},
 		#else
 		.origin = { r_l_bounds.origin.x + ROUND_LAB_OFF_SQ, r_l_bounds.origin.y - LABEL_HEIGHT + LABEL_V_OFF},
 		#endif
@@ -190,10 +209,16 @@ static void initial_text_layer_setup(Layer *window_layer) {
 	GRect l_lab_bounds = (GRect) {
 		#ifdef PBL_ROUND
 		.origin = { l_l_bounds.origin.x + LEVEL_LAB_OFF_RD, l_l_bounds.origin.y - LABEL_HEIGHT + LABEL_V_OFF},
+		#elif PBL_PLATFORM_APLITE
+		.origin = { l_l_bounds.origin.x, l_l_bounds.origin.y - LABEL_HEIGHT + LABEL_V_OFF},	
 		#else
 		.origin = { l_l_bounds.origin.x + LEVEL_LAB_OFF_SQ, l_l_bounds.origin.y - LABEL_HEIGHT + LABEL_V_OFF},
 		#endif
+		#ifdef PBL_PLATFORM_APLITE
+		.size = {l_l_bounds.size.w - ROUND_LAB_OFF_SQ/2, LABEL_HEIGHT}
+		#else
 		.size = {l_l_bounds.size.w, LABEL_HEIGHT}
+		#endif
 	};
 	lap_label = text_layer_create(l_lab_bounds);
 	text_layer_set_text_alignment(lap_label, GTextAlignmentRight);
@@ -358,7 +383,7 @@ static void progress_layer_update_proc(Layer *l, GContext *ctx) {
 		#ifdef PBL_COLOR
 		draw_progress_bar(l, ctx, lap_progress, PROG_BACK, PROG_GREY, PROG_COMP);
 		#else
-		draw_progress_bar(l, ctx, lap_progress, PROG_BACK, GColorClear, GColorWhite);
+		draw_progress_bar(l, ctx, lap_progress, PROG_BACK, GColorClear, GColorBlack);
 		#endif
 	}
 	
