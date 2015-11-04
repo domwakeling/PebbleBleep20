@@ -21,6 +21,11 @@
                 "file": "images/bleep_icon_28.png",
                 "menuIcon": true,
                 "name": "MENU_ICON",
+                "targetPlatforms": [
+                    "aplite",
+                    "basalt",
+                    "chalk"
+                ],
                 "type": "png"
             },
             {
