@@ -73,6 +73,9 @@ static Layer *progress_layer;
 AppTimer *bleep_timer, *progress_timer;
 ActionBarLayer *a_b_layer;
 GBitmap *square_icon, *tri_icon, *dots_icon;
+#ifdef PBL_PLATFORM_APLITE
+GFont *leco_font;
+#endif
 
 /*** FUNCTION DECLARATIONS TO BE COMPLETED LATER ***/
 void start_bleep_timer();
@@ -132,6 +135,10 @@ static void initial_text_layer_setup(Layer *window_layer) {
 	
 	GRect bounds = layer_get_bounds(window_layer);
 	
+	#ifdef PBL_PLATFORM_APLITE
+	leco_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_LECO_UPLOAD_42));
+	#endif
+	
 	GRect r_l_bounds = (GRect) {
 		#ifdef PBL_PLATFORM_APLITE
 		.origin = { ROUND_LAB_OFF_SQ/2 , (bounds.size.h - ROUND_HEIGHT) / 2 + ROUND_V_OFF},
@@ -153,7 +160,8 @@ static void initial_text_layer_setup(Layer *window_layer) {
 	#ifdef PBL_COLOR
 	text_layer_set_font(round_layer, fonts_get_system_font(FONT_KEY_LECO_42_NUMBERS));
 	#else
-	text_layer_set_font(round_layer, fonts_get_system_font(FONT_KEY_BITHAM_34_MEDIUM_NUMBERS));
+	//text_layer_set_font(round_layer, fonts_get_system_font(FONT_KEY_BITHAM_34_MEDIUM_NUMBERS));
+	text_layer_set_font(round_layer, leco_font);
 	#endif
 	text_layer_set_background_color(round_layer, GColorClear);
 	#ifdef PBL_COLOR
@@ -182,7 +190,8 @@ static void initial_text_layer_setup(Layer *window_layer) {
 	#ifdef PBL_COLOR
 	text_layer_set_font(lap_layer, fonts_get_system_font(FONT_KEY_LECO_42_NUMBERS));
 	#else
-	text_layer_set_font(lap_layer, fonts_get_system_font(FONT_KEY_BITHAM_34_MEDIUM_NUMBERS));
+	//text_layer_set_font(lap_layer, fonts_get_system_font(FONT_KEY_BITHAM_34_MEDIUM_NUMBERS));
+	text_layer_set_font(lap_layer, leco_font);
 	#endif
 	text_layer_set_background_color(lap_layer, GColorClear);
   layer_add_child(window_layer, text_layer_get_layer(lap_layer));

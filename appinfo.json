@@ -9,6 +9,15 @@
     "resources": {
         "media": [
             {
+                "characterRegex": "[0-9 ]",
+                "file": "fonts/leco_1976.ttf",
+                "name": "LECO_UPLOAD_42",
+                "targetPlatforms": [
+                    "aplite"
+                ],
+                "type": "font"
+            },
+            {
                 "file": "images/bleep_icon_28.png",
                 "menuIcon": true,
                 "name": "MENU_ICON",
@@ -54,7 +63,7 @@
         "chalk"
     ],
     "uuid": "277451fb-9d0d-438a-ae1c-8d759294188d",
-    "versionLabel": "1.1",
+    "versionLabel": "1.2",
     "watchapp": {
         "watchface": false
     }
